@@ -14,8 +14,7 @@ after_sucess:
   - docker build -t cloudrck/multi-server ./server
   - docker build -t cloudrck/multi-worker ./worker
   # Login to Docker Hub CLI
-  #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push images to Docker Hub
   - docker push cloudrck/multi-client
   - docker push cloudrck/multi-nginx
