@@ -2,21 +2,21 @@ sudo: required
 services:
   - docker
 
-  before_install:
-    - docker build -t djacobs/react-test -f ./client/Dockerfile.dev ./client
+before_install:
+  - docker build -t djacobs/react-test -f ./client/Dockerfile.dev ./client
 
-  script:
-    - docker run -e CI=true djacobs/react-test npm test
+script:
+  - docker run -e CI=true djacobs/react-test npm test
 
-  after_sucess:
-    - docker build -t djacobs/multi-client ./client
-    - docker build -t djacobs/multi-nginx ./nginx
-    - docker build -t djacobs/multi-server ./server
-    - docker build -t djacobs/multi-worker ./worker
-    # Login to Docker Hub CLI
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    # Push images to Docker Hub
-    - docker push djacobs/multi-client
-    - docker push djacobs/multi-nginx
-    - docker push djacobs/multi-server
-    - docker push djacobs/multi-worker
+after_sucess:
+  - docker build -t djacobs/multi-client ./client
+  - docker build -t djacobs/multi-nginx ./nginx
+  - docker build -t djacobs/multi-server ./server
+  - docker build -t djacobs/multi-worker ./worker
+  # Login to Docker Hub CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push images to Docker Hub
+  - docker push djacobs/multi-client
+  - docker push djacobs/multi-nginx
+  - docker push djacobs/multi-server
+  - docker push djacobs/multi-worker
